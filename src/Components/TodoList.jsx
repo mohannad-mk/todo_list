@@ -31,6 +31,11 @@ const TodoList = () => {
     // Update the state with the new array (without the deleted todo)
     setTodos(newTodos);
   };
+  const handleDeleteList = (index, listIndex) => {
+    const newTodos = [...todos];
+    newTodos[index].lists.splice(listIndex, 1);
+    setTodos(newTodos);
+  };
   return (
     <>
       <div className="todo-container">
@@ -63,6 +68,11 @@ const TodoList = () => {
               {todo.lists.map((list, listIndex) => (
                 <li key={listIndex} className="todo_inside_list">
                   <p>{list}</p> {/* Display individual list item */}
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDeleteList(index, listIndex)}>
+                    Delete
+                  </button>
                 </li>
               ))}
             </ul>
@@ -76,7 +86,9 @@ const TodoList = () => {
               />
               <button
                 className="add-list-button"
-                onClick={() => handleAddList(index)}></button>
+                onClick={() => handleAddList(index)}>
+                Add List
+              </button>
             </div>
           </div>
         ))}
